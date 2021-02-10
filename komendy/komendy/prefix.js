@@ -7,7 +7,7 @@ module.exports = {
     run: async (client, message, args) => {
 
         const permisja = new Discord.MessageEmbed()
-        .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/786700077937983549/797605135462170635/9330_tickred_2.gif")
+        .setAuthor("Błąd!", "")
         .setDescription("`Nie posiadasz Uprawnień do Zarządzania Serwera!`")
         .setColor("#FF8000")
         .setFooter(`Wywołane przez: ${message.author.tag} | ${message.author.id}`, message.author.displayAvatarURL())

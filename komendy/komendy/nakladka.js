@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "nakladka",
-    aliases: [],
+    aliases: ["nakładka"],
     run: async (client, msg) => {
     const Canvas = require('canvas')
     const canvas = Canvas.createCanvas(1000, 1000);

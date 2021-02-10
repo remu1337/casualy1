@@ -9,7 +9,7 @@ module.exports = {
 
         if (!message.member.hasPermission("MANAGE_GUILD")) {
             const permisja = new Discord.MessageEmbed()
-            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/786700077937983549/797605135462170635/9330_tickred_2.gif")
+            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
             .setDescription("`Nie posiadasz Uprawnień do Zarządzania Serwera!`")
             .setColor("#FF8000")
             .setFooter(`Wywołane przez: ${message.author.tag} | ${message.author.id}`, message.author.displayAvatarURL())
@@ -31,7 +31,7 @@ module.exports = {
             let bladargs = new Discord.MessageEmbed()
             .setDescription("Podaj Kolor!")
             .setColor('#FF8000')
-            .setAuthor(`Błąd!`, message.author.displayAvatarURL({ dynamic:true }))
+            .setAuthor(`Błąd!`, 'https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png')
             .setFooter(`Wywołane przez: ${message.author.tag} | ${message.author.id}`, message.author.displayAvatarURL())
             return message.channel.send(bladargs)
         }
@@ -42,7 +42,7 @@ module.exports = {
             let bladargs = new Discord.MessageEmbed()
             .setDescription("Nasz Bot nie obsługuje tego Koloru! Lista Kolorów `r!kolory`")
             .setColor('#FF8000')
-            .setAuthor(`Błąd!`, message.author.displayAvatarURL({ dynamic:true }))
+            .setAuthor(`Błąd!`, 'https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png')
             .setFooter(`Wywołane przez: ${message.author.tag} | ${message.author.id}`, message.author.displayAvatarURL())
             return message.channel.send(bladargs)
         }
@@ -50,9 +50,9 @@ module.exports = {
         db.set(`${message.guild.id}_typ_kolor`, kolory[wybrany_kolor])
         
         let sukces = new Discord.MessageEmbed()
-        .setAuthor(`Ustawiono Kolor Reklamy!`, message.author.displayAvatarURL({ dynamic:true }))
+        .setAuthor(`Ustawiono Kolor Reklamy!`, 'https://cdn.discordapp.com/attachments/797926429257891851/805468840083324978/Tick_Mark_Dark-512.png')
         .setColor('#FF8000')
-        .setDescription(`Kolor Reklamy został pomyślnie zmieniony!\nNowy Kolor: **${wybrany_kolor}**`)
+        .setDescription(`Kolor Reklamy został pomyślnie zmieniony na **${wybrany_kolor}**`)
         .setFooter(`Wywołane przez: ${message.author.tag} | ${message.author.id}`, message.author.displayAvatarURL())
         return message.channel.send(sukces)
     }

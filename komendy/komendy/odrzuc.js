@@ -21,21 +21,21 @@ module.exports = {
         }
 
         const osoba = new MessageEmbed()
-        .setAuthor("Odrzucono!", "https://cdn.discordapp.com/attachments/780363127376183306/780790637464518656/wrong.gif")
+        .setAuthor("Odrzucono!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
         .setDescription("Reklama serwera `" + db.get(`reklama_do_${args[0]}_name`) + "` została odrzucona z **POWODU** \n`" + args.slice(1).join(" ") + "`")
         .setFooter(`Weryfikowana przez: ${msg.author.tag} | ${msg.author.id}`, msg.author.displayAvatarURL())
         .setColor("#FF8000")
         client.users.cache.get(db.get(`reklama_do_${args[0]}_osoba`)).send(osoba)
 
         const kanal_reklam = new MessageEmbed()
-        .setAuthor("Odrzucono!", "https://cdn.discordapp.com/attachments/780363127376183306/780790637464518656/wrong.gif")
+        .setAuthor("Odrzucono!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
         .setDescription("Reklama tego serwera została odrzucona z **POWODU**\n`" + args.slice(1).join(" ") + "`")
         .setColor("#FF8000")
         .setFooter(`Weryfikowana przez: ${msg.author.tag} | ${msg.author.id}`, msg.author.displayAvatarURL())
         client.channels.cache.get(db.get(`kanal_reklama_${args[0]}`)).send(kanal_reklam)
 
         const statusy = new MessageEmbed()
-        .setAuthor("Reklama Odrzucona!", "https://cdn.discordapp.com/attachments/780363127376183306/780790637464518656/wrong.gif")
+        .setAuthor("Reklama Odrzucona!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
         ///.setDescription("Reklama Serwera `" + db.get(`reklama_do_${args[0]}_name`) + "` została odrzucona z **Powodu:**`" + args.slice(1).join(" ") + "`")
         .addField('Nazwa Serwera:', '```\n' + db.get(`reklama_do_${args[0]}_name`) + '\n```')
         .addField('Z Powodu', '```\n' + args.slice(1).join(" ") + '\n```')

@@ -9,15 +9,17 @@ module.exports = {
 
         if (!msg.member.hasPermission("MANAGE_GUILD")) {
             const brak_uprawnien = new MessageEmbed()
-            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/786700077937983549/797605135462170635/9330_tickred_2.gif")
+            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
             .setColor("RED")
             .setDescription("`Nie posiadasz Uprawnień do Zarządzania Serwera!`")
+            .setFooter(`Wywołane przez: ${msg.author.tag} ${msg.author.id}`, msg.author.displayAvatarURL())
+
         return msg.channel.send(brak_uprawnien)
         }
 
         if (db.get(`reklama_do_${msg.guild.id}`)) {
             const czeka = new MessageEmbed()
-            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/786700077937983549/797605135462170635/9330_tickred_2.gif")
+            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
             .setDescription("`Reklama oczekuje na Weryfikacje przez Weryfikatorów!`")
             .setColor("RED")
             .setFooter(`Wywołane przez: ${msg.author.tag} ${msg.author.id}`, msg.author.displayAvatarURL())
@@ -26,7 +28,7 @@ module.exports = {
 
         if (!db.get(`kanal_reklama_${msg.guild.id}`)) {
             const brak_kanału = new MessageEmbed()
-            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/786700077937983549/797605135462170635/9330_tickred_2.gif")
+            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
             .setDescription("`Ustaw najpierw kanał do reklama!`")
             .setColor("RED")
             .setFooter(`Wywołane przez: ${msg.author.tag} ${msg.author.id}`, msg.author.displayAvatarURL())
@@ -35,7 +37,7 @@ module.exports = {
 
         if (!args[0]) {
             const brak_reklamy = new MessageEmbed()
-            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/786700077937983549/797605135462170635/9330_tickred_2.gif")
+            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
             .setDescription("`Podaj treść twojej reklamy!`")
             .setColor("RED")
             .setFooter(`Wywołane przez: ${msg.author.tag} ${msg.author.id}`, msg.author.displayAvatarURL())
@@ -44,7 +46,7 @@ module.exports = {
 
         if (args.join(" ").includes("@here")) {
             const nie_dawać_here_do_reklamy = new Discord.MessageEmbed()
-            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/786700077937983549/797605135462170635/9330_tickred_2.gif")
+            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
             .setDescription(`Usuń wzmianke here z reklamy.`)
             .setColor("RED")
             .setFooter(`Wywołane przez: ${msg.author.tag} ${msg.author.id}`, msg.author.displayAvatarURL())
@@ -53,7 +55,7 @@ module.exports = {
         
            if (args.join(" ").includes("@everyone")) {
             const nie_dawać_evryone_do_reklamy = new Discord.MessageEmbed()
-            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/786700077937983549/797605135462170635/9330_tickred_2.gif")
+            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
             .setDescription(`Usuń wzmianke everyone z Reklamy!`)
             .setColor("RED")
             .setFooter(`Wywołane przez: ${msg.author.tag} ${msg.author.id}`, msg.author.displayAvatarURL())
@@ -62,7 +64,7 @@ module.exports = {
             
            if (args.join(" ").includes("discord.gg/" || "https://discord.gg/" || "discordapp.com/invite/" || "https://discordapp.com/invite/")) {
             const nie_dodawaj_linku = new Discord.MessageEmbed()
-            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/786700077937983549/797605135462170635/9330_tickred_2.gif")
+            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
             .setDescription(`Usuń zaproszenie z reklamy, bot sam doda!`)
             .setColor("RED")
             .setFooter(`Wywołane przez: ${msg.author.tag} ${msg.author.id}`, msg.author.displayAvatarURL())
@@ -81,20 +83,20 @@ module.exports = {
            msg.channel.createInvite({
             maxAge: 0
             }).then(invite => { 
-                db.set(`reklama_do_${msg.guild.id}`, args.join(" ") + `\nhttps://discord.gg/${invite.code}`)
+                db.set(`reklama_do_${msg.guild.id}`, args.join(" "), `\nhttps://discord.gg/${invite.code}`)
                 db.set(`reklama_do_${msg.guild.id}_name`, msg.guild.name)
                 db.set(`reklama_do_${msg.guild.id}_osoba`, msg.author.id)
-                db.set(`reklama_${msg.guild.id}_serwera`, args.join(" ") + `\nhttps://discord.gg/${invite.code}`)
+                db.set(`reklama_${msg.guild.id}_serwera`, args.join(" "), `\nhttps://discord.gg/${invite.code}`)
             
             const reply = new MessageEmbed()
-            .setAuthor("Pomyślnie Ustawiono!", "https://cdn.discordapp.com/attachments/786700077937983549/797605135211298876/5845_tickgreen_1.gif")
+            .setAuthor("Pomyślnie Ustawiono!", "https://cdn.discordapp.com/attachments/797926429257891851/805468840083324978/Tick_Mark_Dark-512.png")
             .setDescription(`Reklama tego serwera została wysłana do weryfikacji!`)
             .addField('Następnie', '```\nCzekaj na Weryfikacje Reklamy!\n```')
             .setColor('#FF8000')
             msg.channel.send(reply)
 
             const spr_reklam = new MessageEmbed()
-            .setAuthor("Nowa reklama do sprawdzenia!", "https://cdn.discordapp.com/attachments/786700077937983549/797605135211298876/5845_tickgreen_1.gif")
+            .setAuthor("Nowa reklama do sprawdzenia!", "https://cdn.discordapp.com/attachments/797926429257891851/805468840083324978/Tick_Mark_Dark-512.png")
             .setDescription("Nazwa/ID Serwera: `" + msg.guild.name + " || " + msg.guild.id + "`\nDodał: `" + msg.author.username + " || " + msg.author.id + "`")
             .addField("Reklama:", "`" + db.get(`reklama_do_${msg.guild.id}`) + "`")
             .addField("Zaproszenie kliknij", `[**Zaproszenie**](https://discord.gg/${invite.code})`)
@@ -104,3 +106,7 @@ module.exports = {
         })
     }
 }
+
+
+
+

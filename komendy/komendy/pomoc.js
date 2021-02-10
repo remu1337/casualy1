@@ -34,9 +34,11 @@ module.exports = {
         .addField(`${emote5} Instrukcja Konfiguracji`, `${prefix}instrukcja`)
         .setFooter(`Wywołane Przez: ${message.author.tag} | ${message.author.id}`)
         .setTimestamp()
-        message.channel.send(pomocmenu)
+        message.channel.send(pomocmenu).then(embedMessage => {
+          embedMessage.react("👍").then(embedMessage.react("😅")
+          )})
           } else {
-            if (args[0] == 'info') {
+            if (embedMessage.react('😅')) {
               client.user.displayAvatarURL()
               const pomocmenu = new Discord.MessageEmbed()
               .setThumbnail(`${ client.user.displayAvatarURL()}`)

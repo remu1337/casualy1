@@ -13,10 +13,10 @@ module.exports = {
 
         const linki = new Discord.MessageEmbed()
 
-    .setTitle(`${emote} Przydatne Linki bota Casualy.Ad!`)
+    .setTitle(`${emote} Przydatne Linki bota Casualy.AD!`)
     .setColor('#FF8000')
     .setDescription(`${emote1}Strona Bota: [KLIKAJ](https://casualy.tk/) \n${emote1}Support Serwer: [KLIKAJ](https://discord.gg/T7zeXakwhD) \n${emote1}Dodaj bota: [KLIKAJ](https://discord.com/api/oauth2/authorize?client_id=804389994600857612&permissions=8&scope=bot)`)
-    .setFooter(`Użyte przez ${msg.author.tag} | ${msg.author.id}`,  `${msg.author.displayAvatarURL()}`)
+    .setFooter(`Wywołane przez: ${msg.author.tag} | ${msg.author.id}`,  `${msg.author.displayAvatarURL()}`)
     msg.channel.send(linki)
     }
     

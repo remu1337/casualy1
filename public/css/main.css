@@ -1,0 +1,175 @@
+body{
+    background: black;
+    font-family: Arial;
+    color: white;
+    background-image: url(https://cutewallpaper.org/21/gif-black-background/Pin-on-Super-gif.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.head{
+    font-weight: bold;
+    position: relative;
+    left: 30%;
+    width: 40%;
+}
+.main{
+    position: relative;
+    top: 300px;
+    width: 50%;
+}
+.counters{
+    background: transparent;
+    border: 10px solid orangered;
+    border-radius: 25px;
+    animation-name: button_anim;
+    animation-duration: 2s;
+    padding: 40px;
+    left: 1%;
+    animation-iteration-count: infinite;
+    position: relative;
+    height: fit-content;
+    line-height: 50px;
+    top: 500px;
+    font-size: 25px;
+    display: inline-block;
+    width: 90%;
+    text-align: center;
+    word-spacing: 40px;
+}
+code{
+    color: orangered;
+    font-family: Consolas;
+    font-weight: bold;
+}
+.team{
+    position: relative;
+    top: 900px;
+    left: 38%;
+    width: 50%;
+}
+.footer{
+    color: orangered;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    width: 25%;
+    position: relative;
+    left: 37%;
+    top: 900px;
+    margin-bottom: 5px;
+    background-image: url(https://thumbs.gfycat.com/ForkedImpeccableIrrawaddydolphin-size_restricted.gif);
+}
+#opis{
+    background: transparent;
+    border: 10px solid orangered;
+    border-radius: 25px;
+    animation-name: button_anim;
+    animation-duration: 2s;
+    padding: 10px;
+    left: 10%;
+    animation-iteration-count: infinite;
+    position: relative;
+    height: fit-content;
+    line-height: 50px;
+    font-size: 25px;
+    display: inline-block;
+    display: block;
+}
+#stabilnosc{
+    background: transparent;
+    border: 10px solid orangered;
+    border-radius: 25px;
+    animation-name: button_anim;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+    padding: 10px;
+    left: 80%;
+    height: fit-content;
+    position: relative;
+    line-height: 50px;
+    font-size: 25px;
+}
+ul{
+    list-style-type: none;
+    display: inline-block;
+}
+li{
+    display: inline-block;
+}
+#but{
+    display: inline-block;
+    padding: 15px 25px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: orangered;
+    background-color: black;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px rgb(56, 56, 56);
+    border: 0,5px solid orangered;
+    font-weight: bold;
+}
+#but:hover {
+    background-color: #a02b00
+}
+#but:active {
+    background-color: transparent;
+    box-shadow: 0 5px rgb(63, 63, 63);
+    transform: translateY(4px);
+}
+
+@keyframes button_anim {
+    from {border-color: orangered;}
+    to {border-color: rgb(0, 0, 0);}
+}
+a:link{
+    color:white;
+}
+#but:hover{
+    background: orangered;
+    color: black;
+}
+#logo{
+    position: relative;
+    left: 85%;
+    top: 105%;
+    width: fit-content;
+}
+#look:hover{
+    background: orangered;
+    color: black;
+    animation-iteration-count: infinite;
+    animation-name: anim;
+    animation-duration: 2s;
+}
+#but:disabled,
+#but[disabled]{
+  border: 1px solid #000000;
+  background-color: #292929;
+  color: #ffffff;
+}
+#look{
+    background-color: transparent;
+    height: 50px;
+    width: fit-content ;
+    box-shadow: 1px 1px 1px 1px solid orangered;
+    border: 5px solid orangered;
+    border-radius: 5px;
+    animation-iteration-count: infinite;
+    animation-name: button_anim;
+    animation-duration: 2s;
+    color:white;
+    padding-bottom: 5px;
+    font-size: 20px;
+    margin-left: 20%;
+    margin-bottom: 5%;
+    font-size: 30px;
+}
+@keyframes anim {
+    from {background-color: orangered;}
+    to {background-color: rgb(255, 102, 47);}
+}
+
+

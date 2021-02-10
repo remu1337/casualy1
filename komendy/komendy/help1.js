@@ -1,13 +1,14 @@
-const pagination = require('discord.js-pagination');
 const Discord = require('discord.js');
 const db = require('quick.db')
+
+
 module.exports = {
-    name: "sfsfafafafafafafa2221212121",
+    name: "help1",
 
-    run : async(client, message, args) => {
+    run: async (client, message, args) => {
 
-        const emote = client.emojis.cache.find(e => e.name === 'config12')
-        const emote1 = client.emojis.cache.find(e => e.name === 'emotka')
+        const emote = client.emojis.cache.find(e => e.name === 'conf124')
+        const emote1 = client.emojis.cache.find(e => e.name === '798200120411029584')
         const emote2 = client.emojis.cache.find(e => e.name === 'kanal8382')
         const emote3 = client.emojis.cache.find(e => e.name === 'reklama8382')
         const emote4 = client.emojis.cache.find(e => e.name === 'bot6969')
@@ -17,51 +18,21 @@ module.exports = {
         const emote8 = client.emojis.cache.find(e => e.name === 'colorsicon4')
         const emote9 = client.emojis.cache.find(e => e.name === 'paleta67')
         const emote10 = client.emojis.cache.find(e => e.name === 'prefixitp8')
+        const emote11 = client.emojis.cache.find(e => e.name === 'globalchat109')
 
 
         const prefix = db.fetch(`prefix_${message.guild.id}`);
 
-        const glowne = new Discord.MessageEmbed()
+
+        let conf = new Discord.MessageEmbed()
         .setThumbnail(`${ client.user.displayAvatarURL()}`)
-        .setAuthor(`MENU POMOCY`, `https://cdn.discordapp.com/attachments/789064346046562305/798198341250318427/3859_Loading.gif`)
+        .setAuthor('MENU POMOCY', client.user.displayAvatarURL())
+        .setTitle('Mój Prefix na tym Serwerze to'+'`'+prefix+'`')
+        .addField(`${emote} Komendy Reklamowe`,'> **kanał #oznacz-kanał** `Kanał na którym bot rozsyła reklamy`\n> **reklama <treść-reklamy>** `Ustawiasz reklame tego Serwera`')
+        .addField(`${emote1} Komendy Informacyjne!`, '> **podgląd** `Podgląd statusu/reklamy twojego Serwera`\n> **botinfo** `Informacje o bocie`\n> **linki** `Przydatne linki bota`\n> **kolory** `Pokazuje dostępne kolory dla embedu`')
+        .addField(`${emote11} Komendy GlobalChatu`, '> **globalchat-ustaw** `Zamienia aktualny kanał w chat-globalny`\n> **globalchat-odłącz** `Odłącza aktualny kanał od chatu-globalnego`')
         .setColor(`ORANGE`)
-        .setDescription(`Mój Prefix na tym Serwerze to ${prefix}`)
-        .addField(`${emote} Konfiguracja`, `${prefix}pomoc konfiguracja`)
-        .addField(`${emote1} Informacyjne`, `${prefix}pomoc info`)
-        .addField(`${emote5} Instrukcja Konfiguracji`, `${prefix}instrukcja`)
-        .setFooter(`Wywołane Przez: ${message.author.tag} | ${message.author.id}`)
-        .setTimestamp()
-
-        const info = new Discord.MessageEmbed()
-        .setThumbnail(`${ client.user.displayAvatarURL()}`)
-        .setTitle(`${emote} Komendy Informacyjne`)
-        .setColor(`ORANGE`)
-        .addField(`${emote7} Podgląd Reklamy Serwera`, `${prefix}podgląd`)
-        .addField(`${emote4} Informacje o Bocie`, `${prefix}botinfo`)
-        .addField(`${emote6} Ważne Linki Bota`, `${prefix}linki`)
-        .setFooter(`Wywołane Przez: ${message.author.tag} | ${message.author.id}`)
-        .setTimestamp()
-
-        const conf = new Discord.MessageEmbed()
-        .setThumbnail(`${ client.user.displayAvatarURL()}`)
-        .setTitle(`${emote1} Komendy Konfiguracji`)
-        .setColor(`ORANGE`)
-        .addField(`${emote2} Ustawia Kanał Reklam Bota`, `${prefix}kanał #kanał`)
-        .addField(`${emote3} Ustawia Reklame Serwera`, `${prefix}reklama <treść reklamy>`)
-        .addField(`${emote10} Ustawia Nowy Prefix`, `${prefix}prefix <nowy prefix>`)
-        .addField(`${emote9} Lista Kolorów `, `${prefix}kolory`)
-        .addField(`${emote8} Ustawia Kolor Embedu **Tylko Premium**`, `${prefix}embed-kolor <kolor>`)
-        .setTimestamp()
-
-        const pages = [
-                info,
-                conf
-        ]
-
-        const emojiList = [emote, emote1];
-
-        const timeout = '120000';
-
-        pagination(message, pages, emojiList, timeout)
-    }
-}
+        .setFooter(`Wywołane Przez: ${message.author.tag} | ${message.author.id}`, message.author.displayAvatarURL())
+message.channel.send(conf)
+} 
+     }

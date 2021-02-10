@@ -4,11 +4,11 @@ const mongoose = require('mongoose')
 const db = require("quick.db")
 const blacklist = require('./models/blacklist')
 const fs = require("fs");
+require('./web')
+const config = require('./config.json')
 
-const token = "ODA0Mzg5OTk0NjAwODU3NjEy.YBLojw.s8Dsn-JC1LArPRFiwOtdj3CjDbA";
-
-const client = new Client({ 
-    ws: { properties: { $browser: "Discord Android" }},
+const client = new Client({
+    ///ws: { properties: { $browser: "Discord Android" }},
     disableEveryone: true
 });
 
@@ -58,11 +58,7 @@ client.on("guildDelete", guild => {
 
 
 
-
-    
   
-
-
 
 client.on("ready", async msg => {
     client.user.setActivity(`@Casualy [1.5]`, { type: 'PLAYING' })
@@ -80,13 +76,14 @@ client.on("ready", async msg => {
         const emote1 = client.emojis.cache.find(e => e.name === 'link8090')
 
         let kolor_reklamy = db.get(`${id_rek}_typ_kolor`)
+        let reklama = db.get(`reklama_${numer}`)
 
         if (db.get(`premium_${id_rek}`)) {
             if (!db.get(`kanal_reklama_${servers_each.id}`)) return;
         if (!client.channels.cache.get(db.get(`kanal_reklama_${servers_each.id}`))) return; 
             if (!client.guilds.cache.get(servers_each.id)) return;
             const embed = new Discord.MessageEmbed()
-            .setTitle(`**:file_folder: Numer** **${numer}** **||** **:zap: ID** **${db.get(`reklama_${numer}_id`)}** **Status:** **${emote} Premium**`)
+            .setTitle('`📂Numer:' +numer+'\n🔢ID:'+ db.get(`reklama_${numer}_id`)+'\nStatus'+ emote+ 'Premium`')
             .setColor(kolor_reklamy)
             .setDescription(db.get(`reklama_${numer}`))
             client.channels.cache.get(db.get(`kanal_reklama_${servers_each.id}`)).send(embed)
@@ -95,12 +92,12 @@ client.on("ready", async msg => {
             if (!db.get(`kanal_reklama_${servers_each.id}`)) return;
              if (!client.channels.cache.get(db.get(`kanal_reklama_${servers_each.id}`))) return; 
             if (!client.guilds.cache.get(servers_each.id)) return;
-            client.channels.cache.get(db.get(`kanal_reklama_${servers_each.id}`)).send('`📂Numer:' +numer+'`'+'\n`🔢ID:'+ db.get(`reklama_${numer}_id`)+'`'+ '\n`Status: 🔰 Normalny\n\n`'+ db.get(`reklama_${numer}`))
+            client.channels.cache.get(db.get(`kanal_reklama_${servers_each.id}`)).send('`📂Numer:' +numer+'\n🔢ID:'+ db.get(`reklama_${numer}_id`)+ '\nStatus: 🔰 Normalny`\n\n'+db.get(`reklama_${numer}`))
         }
     })
     db.add(`numer`, 1)
         
-    }, 300000)
+    }, 30000)///300000)
     });
     
 client.on("guildCreate", guild => {
@@ -129,6 +126,30 @@ let wzmiankaembed = new Discord.MessageEmbed()
 });
 
 
+client.on('message', message => {
+    const db = require('./models/Kanaly')
+    if(message.author.bot) return;
+    db.findOne({ Channel: message.channel.id, Activated: true}, async(err, data) => {
+        if(data){
+            db.find({ Activated: true}, async(err, data)=>{
+                data.map(({Channel})=>{
+                    if(Channel === message.channel.id) return;
+
+                    client.channels.cache.get(Channel).send(
+                        new Discord.MessageEmbed()
+                        .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+                        .setDescription(message.content)
+                        .setFooter(message.guild.name, message.guild.iconURL({ dynamic: true}))
+                        .setColor('ORANGE')
+                        .setTimestamp()
+                    )
+                })
+            })
+        }
+    })
+})
+
+
 client.on("message", async message => {
  
     let prefix;
@@ -140,9 +161,6 @@ client.on("message", async message => {
     } else {
         prefix = prefixes;
     }
-
-
-
 
     if (!message.content.startsWith(prefix)) return;
       blacklist.findOne({ id : message.author.id }, async(err, data) => {
@@ -165,4 +183,4 @@ client.on("message", async message => {
     })
     })
 
-client.login(token);
+client.login(config.token);

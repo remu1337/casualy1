@@ -5,7 +5,7 @@ let guilds_size;
 module.exports = {
     name: "staty",
     aliases: ["botinfo", "info"],
-    run: async (client, msg) => {
+    run: async (client, msg, shard) => {
 
         var os = require('os')
     var cpuStat = require('cpu-stat');
@@ -22,12 +22,11 @@ module.exports = {
     let statystyki_bota = new MessageEmbed()
     .setColor("#FF8000")
     .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
-    .addField("❯ __Nazwa bota__:", client.user.username, wLini)
-    .addField("❯ __Prefix__:", "r!", wLini)
-    .addField("❯ __Serwery__:", `🛡 ${guildSize}`)
-    .addField("❯ __Użytkownicy__:", `👥 ${usersSize}`)
-    .addField("❯ __Ping__:", `${uptime} ms`)
-    .addField("❯ __Node.js__:", `${process.version}`)
+    .setAuthor('Informacje o Bocie')
+    .addField("Ilość Serwerów:", `🛡 ${guildSize}`)
+    .addField("Ilość Użytkowników:", `👥 ${usersSize}`)
+    .addField("Ping Bota:", `${uptime} ms`)
+    .addField("Wersja Node.js:", `${process.version}`)
     .setFooter(`Wywołane przez: ${msg.author.tag} ${msg.author.id}`, msg.author.displayAvatarURL())
     .setTimestamp();
     msg.channel.send(statystyki_bota)
