@@ -26,7 +26,7 @@ module.exports = {
         const embed2 = new MessageEmbed()
         .setAuthor("Podgląd Reklamy " + msg.guild.name, "https://www.kulturland-brandenburg.de/wordpress/wp-content/plugins/flickr-album-gallery-pro/img/4.gif")
         .setColor("#FF8000")
-        .setDescription(`\n${emote5} Status weryfikacji:${emote4} Zaakceptowana@cas\nStatus: **${emote2} Premium**\n\n${emote} Kanał do Reklam: <#${kanalreklam23}>` + `${emote1} Reklama Serwera:\n` + "```" + reklama + "```")
+        .setDescription(`\n${emote5} Status weryfikacji: ${emote4} Zaakceptowana\nStatus: **${emote2} Premium**\n\n${emote} Kanał do Reklam: <#${kanalreklam23}>` + `${emote1} Reklama Serwera:\n` + "```" + reklama + "```")
         .setFooter(`Wywołane Przez: ${msg.author.tag} | ${msg.author.id}` , msg.author.displayAvatarURL())
         return msg.channel.send(embed2)
 
@@ -51,7 +51,7 @@ module.exports = {
         const embed2 = new MessageEmbed()
         .setAuthor("Podgląd Reklamy " + msg.guild.name, "https://www.kulturland-brandenburg.de/wordpress/wp-content/plugins/flickr-album-gallery-pro/img/4.gif")
         .setColor("#FF8000")
-        .setDescription(`\n${emote5} Status weryfikacji:${emote4} Zaakceptowana\nStatus: **🔰 Normalny**\n\n${emote} Kanał do Reklam: <#${kanalreklam23}>\n` + `${emote1} Reklama Serwera:\n`+ "```" + reklama + "```")
+        .setDescription(`\n${emote5} Status weryfikacji: ${emote4} Zaakceptowana\nStatus: **🔰 Normalny**\n\n${emote} Kanał do Reklam: <#${kanalreklam23}>\n` + `${emote1} Reklama Serwera:\n`+ "```" + reklama + "```")
         .setFooter(`Wywołane Przez: ${msg.author.tag} | ${msg.author.id}` , msg.author.displayAvatarURL())
         return msg.channel.send(embed2)
         

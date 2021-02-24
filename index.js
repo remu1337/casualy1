@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 const db = require("quick.db")
 const blacklist = require('./models/blacklist')
 const fs = require("fs");
-require('./web')
 const config = require('./config.json')
 
 const client = new Client({
@@ -30,6 +29,11 @@ mongoose.connect('mongodb+srv://remu11:CGRYHIUXB9cqmwAW@cluster0.nkkh2.mongodb.n
 
 
 
+
+
+
+
+
 client.categories = fs.readdirSync("./komendy/");
 client.on("guildDelete", guild => {
 
@@ -39,6 +43,7 @@ client.on("guildDelete", guild => {
     .setColor("RED")
 
     client.channels.cache.get("804066496543588362").send(embedzly12)
+    db.delete(`gchat_${guild.id}`)
     db.delete(`reklama_do_${guild.id}`)
     db.delete(`reklama_do_${guild.id}_osoba`)
     db.delete(`reklama_do_${guild.id}_name`)
@@ -56,12 +61,20 @@ client.on("guildDelete", guild => {
    /// client.user.setActivity(`@Casualy 🤗 Serwery: ${client.guilds.cache.size}`, { type: 'WATCHING' })
 ///})
 
-
+const activities_list = [
+    "🧡| @Casualy.AD [v2.3]", 
+    "🌍| Globalchat",
+    "🌟| Wypromuje twój Serwer", 
+    "🍀| Dodaj mnie ;d"
+    ];
 
   
 
 client.on("ready", async msg => {
-    client.user.setActivity(`@Casualy [1.5]`, { type: 'PLAYING' })
+    setInterval(() => {
+        const index = Math.floor(Math.random() * (activities_list.length - 1) + 1); 
+        client.user.setActivity(activities_list[index], { type: 'WATCHING' });
+    }, 10000);
     console.log(`${client.user.tag}`);
     console.log(db.get(`numer`))
     setInterval(() => {
@@ -97,7 +110,7 @@ client.on("ready", async msg => {
     })
     db.add(`numer`, 1)
         
-    }, 30000)///300000)
+    }, 300000)
     });
     
 client.on("guildCreate", guild => {
@@ -125,31 +138,42 @@ let wzmiankaembed = new Discord.MessageEmbed()
         }     
 });
 
-
 client.on('message', message => {
-    const db = require('./models/Kanaly')
-    if(message.author.bot) return;
-    db.findOne({ Channel: message.channel.id, Activated: true}, async(err, data) => {
-        if(data){
-            db.find({ Activated: true}, async(err, data)=>{
-                data.map(({Channel})=>{
-                    if(Channel === message.channel.id) return;
+  
 
-                    client.channels.cache.get(Channel).send(
-                        new Discord.MessageEmbed()
-                        .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-                        .setDescription(message.content)
-                        .setFooter(message.guild.name, message.guild.iconURL({ dynamic: true}))
-                        .setColor('ORANGE')
-                        .setTimestamp()
-                    )
-                })
-            })
-        }
-    })
+
+    client.guilds.cache.forEach(servers_each => {
+
+        if (message.author.bot) return;
+
+                    if (!client.channels.cache.get(db.get(`gchat_${servers_each.id}`))) return;
+                   if (db.get(`gmute_${message.author.id}`)) return;
+                        if (!client.guilds.cache.get(servers_each.id)) return;
+                        if (message.channel.id === db.get(`gchat_${message.guild.id}`)) {
+                            if(servers_each.id == message.guild.id) return;
+                            if (!db.get(`gchat_${servers_each.id}`) === null) return;
+                            
+                    const glob = new Discord.MessageEmbed()
+                    .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.avatarURL({dynamic: true}))
+                    .setDescription(message.content || "Przesyłam Załącznik:")
+                    .setColor('RANDOM')
+                    .setFooter(message.guild.name+`   (${message.guild.id})`, message.guild.iconURL({ dynamic: true }))
+                    client.channels.cache.get(db.get(`gchat_${servers_each.id}`)).send(glob)
+            }
+            if (message.channel.id === db.get(`gchat_${message.guild.id}`)) {
+                message.attachments.forEach(at => {
+
+                const glob1 = new Discord.MessageEmbed()
+                .setAuthor(message.author.tag+ ` (${message.author.id})`, message.author.displayAvatarURL({ dynamic: true }))
+                .setImage(at.attachment)
+                .setColor('RANDOM')
+                .setFooter(message.guild.name+`   (${message.guild.id})`, message.guild.iconURL({ dynamic: true }))
+                client.channels.cache.get(db.get(`gchat_${servers_each.id}`)).send(glob1)
+                                
+                          })
+                        } 
+        })
 })
-
-
 client.on("message", async message => {
  
     let prefix;
@@ -161,11 +185,12 @@ client.on("message", async message => {
     } else {
         prefix = prefixes;
     }
+    const gbans = db.get(`gban_s_${message.author.id}`)
 
     if (!message.content.startsWith(prefix)) return;
-      blacklist.findOne({ id : message.author.id }, async(err, data) => {
-          if(err) throw err;
-          if(!data) {
+    if (gbans == "tak") return;
+
+
       if(message.author.bot) return;
       if(!message.content.startsWith(prefix)) return;
       if(!message.guild) return;
@@ -176,11 +201,8 @@ client.on("message", async message => {
       let command = client.commands.get(cmd)
       if(!command) command = client.commands.get(client.aliases.get(cmd));
       if(command) command.run(client, message, args) 
+    })
+
     
-    } else {
-      message.channel.send('Posiadasz blokade na Komendy!')
-    }
-    })
-    })
 
 client.login(config.token);

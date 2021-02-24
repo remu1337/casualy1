@@ -3,8 +3,8 @@ const db = require('quick.db')
 
 
 module.exports = {
-    name: "help1",
-
+    name: `pomoc`,
+    aliases: [`help`],
     run: async (client, message, args) => {
 
         const emote = client.emojis.cache.find(e => e.name === 'conf124')
@@ -30,7 +30,7 @@ module.exports = {
         .setTitle('Mój Prefix na tym Serwerze to'+'`'+prefix+'`')
         .addField(`${emote} Komendy Reklamowe`,'> **kanał #oznacz-kanał** `Kanał na którym bot rozsyła reklamy`\n> **reklama <treść-reklamy>** `Ustawiasz reklame tego Serwera`')
         .addField(`${emote1} Komendy Informacyjne!`, '> **podgląd** `Podgląd statusu/reklamy twojego Serwera`\n> **botinfo** `Informacje o bocie`\n> **linki** `Przydatne linki bota`\n> **kolory** `Pokazuje dostępne kolory dla embedu`')
-        .addField(`${emote11} Komendy GlobalChatu`, '> **globalchat-ustaw** `Zamienia aktualny kanał w chat-globalny`\n> **globalchat-odłącz** `Odłącza aktualny kanał od chatu-globalnego`')
+        .addField(`${emote11} Komendy GlobalChatu`, '> **globalchat-ustaw #oznacz-kanał** `Ustawa oznaczony kanał w chat-globalny`\n> **globalchat-odłącz** `Odłącza aktualny kanał od chatu-globalnego`')
         .setColor(`ORANGE`)
         .setFooter(`Wywołane Przez: ${message.author.tag} | ${message.author.id}`, message.author.displayAvatarURL())
 message.channel.send(conf)

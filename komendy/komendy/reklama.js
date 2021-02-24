@@ -69,24 +69,27 @@ module.exports = {
             .setColor("RED")
             .setFooter(`Wywołane przez: ${msg.author.tag} ${msg.author.id}`, msg.author.displayAvatarURL())
            return msg.channel.send(nie_dodawaj_linku)
-
-        
-         if (args.join(" ").length > 1000) {
-            const za_duzo = new MessageEmbed()
-            .setAuthor("Reklama posiada za dużo Zanków!")
-            .setColor('RED')
-            .setFooter(`Wywołane przez: ${msg.author.tag} ${msg.author.id}`, msg.author.displayAvatarURL())
-        return msg.channel.send(za_duzo)
         }
+        if (args.join(" ").length > 1000) { 
+           const za_duzo = new MessageEmbed()
+           .setAuthor("Błąd!", 'https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png')
+           .setDescription(`Reklama posiada za dużo znaków!`)
+           .addField('Prosimy', '```\nMniej niż 1000 znaków!!\n```')
+           .setColor('RED')
+           .setFooter(`Wywołane przez: ${msg.author.tag} ${msg.author.id}`, msg.author.displayAvatarURL())
+       return msg.channel.send(za_duzo)
+       }
+   
     
-    }
-           msg.channel.createInvite({
-            maxAge: 0
-            }).then(invite => { 
-                db.set(`reklama_do_${msg.guild.id}`, args.join(" "), `\nhttps://discord.gg/${invite.code}`)
-                db.set(`reklama_do_${msg.guild.id}_name`, msg.guild.name)
-                db.set(`reklama_do_${msg.guild.id}_osoba`, msg.author.id)
-                db.set(`reklama_${msg.guild.id}_serwera`, args.join(" "), `\nhttps://discord.gg/${invite.code}`)
+           
+    
+       msg.channel.createInvite({
+        maxAge: 0
+        }).then(invite => { 
+            db.set(`reklama_do_${msg.guild.id}`, args.join(" ") + `\nhttps://discord.gg/${invite.code}`)
+            db.set(`reklama_do_${msg.guild.id}_name`, msg.guild.name)
+            db.set(`reklama_do_${msg.guild.id}_osoba`, msg.author.id)
+            db.set(`reklama_${msg.guild.id}_serwera`, args.join(" ") + `\nhttps://discord.gg/${invite.code}`)
             
             const reply = new MessageEmbed()
             .setAuthor("Pomyślnie Ustawiono!", "https://cdn.discordapp.com/attachments/797926429257891851/805468840083324978/Tick_Mark_Dark-512.png")
@@ -99,9 +102,10 @@ module.exports = {
             .setAuthor("Nowa reklama do sprawdzenia!", "https://cdn.discordapp.com/attachments/797926429257891851/805468840083324978/Tick_Mark_Dark-512.png")
             .setDescription("Nazwa/ID Serwera: `" + msg.guild.name + " || " + msg.guild.id + "`\nDodał: `" + msg.author.username + " || " + msg.author.id + "`")
             .addField("Reklama:", "`" + db.get(`reklama_do_${msg.guild.id}`) + "`")
-            .addField("Zaproszenie kliknij", `[**Zaproszenie**](https://discord.gg/${invite.code})`)
+            .addField("Sprawdz czy wszytko się zgadza!", `[**Zaproszenie**](https://discord.gg/${invite.code})`)
             client.channels.cache.get("797252695039279134").send(spr_reklam)
             client.channels.cache.get("797252695039279134").send("@everyone")
+            client.channels.cache.get("797252695039279134").send(msg.guild.id)
 
         })
     }

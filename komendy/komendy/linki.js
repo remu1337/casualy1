@@ -15,7 +15,7 @@ module.exports = {
 
     .setTitle(`${emote} Przydatne Linki bota Casualy.AD!`)
     .setColor('#FF8000')
-    .setDescription(`${emote1}Strona Bota: [KLIKAJ](https://casualy.tk/) \n${emote1}Support Serwer: [KLIKAJ](https://discord.gg/T7zeXakwhD) \n${emote1}Dodaj bota: [KLIKAJ](https://discord.com/api/oauth2/authorize?client_id=804389994600857612&permissions=8&scope=bot)`)
+    .setDescription(`${emote1}Strona Bota: [KLIKAJ](https://casualy.ga/) \n${emote1}Support Serwer: [KLIKAJ](https://discord.gg/KdvePvrwmu) \n${emote1}Dodaj bota: [KLIKAJ](https://discord.com/api/oauth2/authorize?client_id=804389994600857612&permissions=8&scope=bot)`)
     .setFooter(`Wywołane przez: ${msg.author.tag} | ${msg.author.id}`,  `${msg.author.displayAvatarURL()}`)
     msg.channel.send(linki)
     }

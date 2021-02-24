@@ -5,7 +5,7 @@ const db = require("quick.db")
 module.exports = {
     name: "dodaj",
     run: async (client, msg, args) => {
-        if (!msg.member.roles.cache.has("798316494025916478")) return;
+        if (!msg.member.roles.cache.has("797219516920234054")) return;
 
         if (!args[0]) {
             return msg.reply("Podaj id!")
@@ -26,14 +26,14 @@ module.exports = {
         db.set(`reklama_${args[1]}`, db.get(`reklama_do_${args[0]}`))
         db.set(`reklama_${args[1]}_id`, args[0])
         
-        const ustawia = new Discord.MessageEmbed()
-        .setAuthor("Reklama Dodana!", "https://cdn.discordapp.com/attachments/797926429257891851/805468840083324978/Tick_Mark_Dark-512.png")
+       /// const ustawia = new Discord.MessageEmbed()
+       ////// .setAuthor("Reklama Dodana!", "https://cdn.discordapp.com/attachments/797926429257891851/805468840083324978/Tick_Mark_Dark-512.png")
         ///.setDescription("Reklama serwera `" + db.get(`reklama_do_${args[0]}_name`) + "` została dodana pod numer `" + args[1] + "`")
-        .addField('Nazwa Serwera:', '```\n' + db.get(`reklama_do_${args[0]}_name`) + '\n```')
-        .addField('Znajduje się pod Numerem', '```\n' + args[1] + '\n```')
-        .setFooter(`Weryfikowana przez: ${msg.author.tag} | ${msg.author.id}`, msg.author.displayAvatarURL())
-        .setColor('#FF8000')
-        client.users.cache.get(db.get(`reklama_do_${args[0]}_osoba`)).send(ustawia)
+       /// .addField('Nazwa Serwera:', '```\n' + db.get(`reklama_do_${args[0]}_name`) + '\n```')
+        ///.addField('Znajduje się pod Numerem', '```\n' + args[1] + '\n```')
+        ///.setFooter(`Weryfikowana przez: ${msg.author.tag} | ${msg.author.id}`, msg.author.displayAvatarURL())
+       //// .setColor('#FF8000')
+       /// client.users.cache.get(db.get(`reklama_do_${args[0]}_osoba`)).send(ustawia)
     
 
 

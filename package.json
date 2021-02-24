@@ -6,10 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "(https://github.com/Faquer2007/fsfsfs.git)"
-  },
   "keywords": [
     "61234@bm"
   ],
@@ -19,18 +15,10 @@
     "ascii-table": "0.0.9",
     "canvas": "^2.6.1",
     "colors": "^1.4.0",
-    "cpu-stat": "^2.0.1",
-    "discord-pages": "^1.0.2",
-    "discord-pagination.js": "^1.0.2",
     "discord.js": "^12.5.1",
-    "discord.js-pagination": "^1.0.3",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "gifencoder": "^2.0.1",
-    "mongoose": "^5.11.12",
-    "os": "^0.1.1",
-    "page-menu": "^0.1.0",
-    "quick.db": "^7.1.3",
-    "reconlx": "^1.0.8"
+    "mongoose": "^5.11.15",
+    "quick.db": "^7.1.3"
   }
 }

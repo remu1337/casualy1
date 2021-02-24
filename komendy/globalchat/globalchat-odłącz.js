@@ -1,4 +1,4 @@
-const db = require('../../models/Kanaly')
+const db = require('quick.db')
 const Discord = require('discord.js')
 
 
@@ -17,38 +17,30 @@ module.exports = {
         return message.channel.send(permisja)
         }
 
+        if(!db.get(`gchat_${message.guild.id}`)) { 
 
-        const embed = new Discord.MessageEmbed()
-.setAuthor("Ustawiono!", "https://cdn.discordapp.com/attachments/797926429257891851/805468840083324978/Tick_Mark_Dark-512.png")
-.setDescription("`Pomyślnie odłączono kanał od Chatu Globalnego `")
-.setColor('#FF8000')
-.setFooter(`Wywołane przez: ${message.author.tag} | ${message.author.id}`, message.author.displayAvatarURL())
+            const nieconnect = new Discord.MessageEmbed()
+            .setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
+            .setDescription(`${message.channel} nie jest podłączony pod Chat Globalny!`)
+            .setColor("#FF8000")
+            .setFooter(`Wywołane przez: ${message.author.tag} | ${message.author.id}`, message.author.displayAvatarURL())
+            
+            message.channel.send(nieconnect)
+            
+            } 
+            if(db.get(`gchat_${message.guild.id}`)) {
+        
+                db.delete(`gchat_${message.guild.id}`)
+                const embed = new Discord.MessageEmbed()
+                .setAuthor("Odłączono!", "https://cdn.discordapp.com/attachments/797926429257891851/805468840083324978/Tick_Mark_Dark-512.png")
+                .setDescription("`Pomyślnie odłączono kanał od Chatu Globalnego `")
+                .setColor('#FF8000')
+                .setFooter(`Wywołane przez: ${message.author.tag} | ${message.author.id}`, message.author.displayAvatarURL())
+                message.channel.send(embed)
+            }
 
 
-
-        const query = { 
-            Guild: message.guild.id, 
-            Channel: message.channel.id,
-             Author: message.author.id,
-              Activated: true,
-        }
-
-db.findOne(query, async (err, data) => {
-if (data) { 
-    await db.findOneAndDelete(query);
-    return message.channel.send(embed)
-}
-
-const nieconnect = new Discord.MessageEmbed()
-.setAuthor("Błąd!", "https://cdn.discordapp.com/attachments/797926429257891851/805469345358151710/Close_Icon_Dark-512.png")
-.setDescription(`${message.channel} Nie jest podłączony pod Chat Globalny!`)
-.setColor("#FF8000")
-.setFooter(`Wywołane przez: ${message.author.tag} | ${message.author.id}`, message.author.displayAvatarURL())
-
-message.channel.send(nieconnect)
-
-})
-
+   
 
     }
 }

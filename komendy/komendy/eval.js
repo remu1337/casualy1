@@ -5,7 +5,14 @@ module.exports = {
     name: 'eval',
     run: async (client, message, args) => {
 
+
+        if (args.join(" ").toLowerCase().includes("token")) {
+            value = "spierdalaj matka cie nie kocha"
+        }
+
+
         if (message.author.id !== '768702975576899614') return message.channel.send('Byniu ta komenda tylko dla Dev Bota!')
+
 
         if (!args.length) {
             let argument = new Discord.MessageEmbed()
@@ -24,9 +31,7 @@ module.exports = {
           } else {
               value = evaled
           }
-          if (args.join(" ").toLowerCase().includes("token")) {
-              value = "już daje"
-          }
+         
           let hrStart = process.hrtime()
           let hrDiff;
           hrDiff = process.hrtime(hrStart)

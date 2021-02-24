@@ -1,53 +1,76 @@
-const blacklist = require('../../models/blacklist')
-const { MessageEmbed } = require('discord.js')
+const Discord = require(`discord.js`)
+const db = require(`quick.db`)
 
 module.exports = {
-    name : 'gban',
-    
-    
-    run : async(client, message, args) => {
+name: 'gban',
+run: async (client, message, args) => {
+    if(message.author.id !== '768702975576899614') return message.channel.send('Ta komenda jest tylko dla OWNERA BOTA!')
 
+    const channel = client.channels.cache.get('813431269223301190')
 
+    if (!args[0]) {
+   message.reply('Podaj argumenty! dodaj/odbierz`')
+    } 
 
-        if(message.author.id !== '768702975576899614') return message.channel.send('Ta komenda jest tylko dla OWNERA BOTA!')
-        const User = message.guild.members.cache.get(args[0])
-        if(!User) return message.channel.send('Zła Nazwa lub ID!')
+    const typ = 
+        message.mentions.members.first() ||
+        client.users.cache.get(args[1])
 
-        const embed12 = new MessageEmbed()
-        .setAuthor('Pomyślnie nadano!')
-        .setColor('RED')
-        .setThumbnail('https://cdn.discordapp.com/attachments/780804972392087552/800726253287374868/Hammer.png')
-        .setDescription(`Użytkownik o ID ${User.user.tag} otrzymał globalną blokade na Komendy!`)
-        .setFooter('Casualy.AD')
+    if (!typ) {
+     message.reply('Podaj ID lub oznacz Użytkownika!')
+    }
 
-        const embed6 = new MessageEmbed()
+    if (args[0] == "dodaj") {
+        let powod = args.slice(2).join(" ")
+
+        if (!powod) {
+            powod = "Brak Powodu!"
+        }
+        db.set(`gban_s_${typ.id}`, "tak")
+        db.set(`gban_p_${typ.id}`, powod)
+        db.set(`gban_b_${typ.id}`, message.author.id)
+
+        
+        message.reply('Pomyślnie nadano!')
+
+        const embed6 = new Discord.MessageEmbed()
         .setAuthor('Global Ban!')
         .setColor('RED')
         .setThumbnail('https://cdn.discordapp.com/attachments/780804972392087552/800726253287374868/Hammer.png')
-        .setDescription(`Otrzymałeś Globalną Blokade na Komendy!`)
-        .setFooter('Casualy.AD')
+        .setDescription(`Otrzymałeś Globalną Blokade na Komendy!\n **Z powodu: ${powod}**`)
+        .setFooter(`Nałozył: ${message.author.tag}| ${message.author.id}|Casualy.AD`, message.author.displayAvatarURL({dynamic: true }))
+        typ.send(embed6)
 
+        const embed12 = new Discord.MessageEmbed()
+        .setAuthor('Pomyślnie nadano!')
+        .setColor('RED')
+        .setThumbnail('https://cdn.discordapp.com/attachments/780804972392087552/800726253287374868/Hammer.png')
+        .setDescription(`Użytkownik ${typ.user.tag} [${typ.id}] otrzymał globalną blokade na Komendy!\nPowód blokady: **${powod}**`)
+        .setFooter(`Nałozył: ${message.author.tag}| ${message.author.id}|Casualy.AD`, message.author.displayAvatarURL({dynamic: true }))
+        client.channels.cache.get("813431269223301190").send(embed12)
+    } else if (args[0] == "odbierz") {
+        db.set(`gban_s_${typ.id}`, "nie")
+        db.set(`gban_p_${typ.id}`, "Globalna blokda zdjęta przez: "+message.author.tag+" ("+message.author.id+")")
 
+   message.reply('Pomyślnie odebrano!')
 
-        blacklist.findOne({ id : User.user.id }, async(err, data) => {
-            if(err) throw err;
-            if(data) {
-                message.channel.send(`**${User.displayName}** już ma globalbana!`)
-            } else {
-                data = new blacklist({ id : User.user.id })
-                data.save()
-                .catch(err => console.log(err))
-            message.channel.send(embed12)
-            User.send(embed6)
-            }
-           
-        })
+        let napw = new Discord.MessageEmbed()
+        .setAuthor('Global Ban!')
+        .setColor('GREEN')
+        .setThumbnail('https://cdn.discordapp.com/attachments/780804972392087552/800726253287374868/Hammer.png')
+        .setDescription(`Odebrano Globalna Blokade na Komendy!`)
+        .setFooter(`Odebrał: ${message.author.tag}| ${message.author.id}|Casualy.AD`, message.author.displayAvatarURL({dynamic: true }))
+              typ.send(napw)
+const log = new Discord.MessageEmbed()
+      .setAuthor('Odebrano Gbana!')
+        .setColor('GREEN')
+        .setThumbnail('https://cdn.discordapp.com/attachments/780804972392087552/800726253287374868/Hammer.png')
+        .setDescription(`Użytkownikowi ${typ.user.tag} [${typ.id}] została odebrana globalna blokada na Komendy!`)
+        .setFooter(`Odebrał: ${message.author.tag}| ${message.author.id}|Casualy.AD`, message.author.displayAvatarURL({dynamic: true }))
+        return channel.send(log)
     }
+
+
 }
 
-
-
-
-
-
-
+}

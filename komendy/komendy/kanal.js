@@ -50,6 +50,11 @@ module.exports = {
             .setFooter(`Wywołane przez: ${msg.author.tag} | ${msg.author.id}`, msg.author.displayAvatarURL())
             return msg.channel.send(no_oznacz_ten_kanal_deklu)
         }
+        men_kan.createOverwrite(msg.guild.id, {
+            
+                 SEND_MESSAGES: false
+
+        })
     
         db.set(`kanal_reklama_${msg.guild.id}`, men_kan.id)
     
